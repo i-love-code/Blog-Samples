@@ -1,7 +1,6 @@
 ﻿using EPiServer.Framework;
 using EPiServer.Framework.Initialization;
 using EPiServer.ServiceLocation;
-using System;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -12,9 +11,9 @@ namespace CommerceSite.Web.Business
     {
         public void Initialize(InitializationEngine context)
         {
-            InitializeRouting();
-
             InitializeDependencyInjection();
+
+            InitializeRouting(RouteTable.Routes);
         }
 
         private void InitializeDependencyInjection()
@@ -22,11 +21,9 @@ namespace CommerceSite.Web.Business
             DependencyResolver.SetResolver(ServiceLocator.Current);
         }
 
-        private void InitializeRouting()
+        private void InitializeRouting(RouteCollection routes)
         {
-            var routes = RouteTable.Routes;
-
-            routes.MapRoute("DefaultMvc", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = "" });
+            routes.MapMvcAttributeRoutes();
         }
 
         public void Uninitialize(InitializationEngine context)

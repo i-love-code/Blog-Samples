@@ -11,6 +11,7 @@ namespace CommerceSite.Web.Controllers
     /// 
     /// Leaving this created for the blog sample project.
     /// </summary>
+    [Route("Seed")]
     public class SeedController : Controller
     {
         private readonly UIUserProvider _userProvider;
